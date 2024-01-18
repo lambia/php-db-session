@@ -14,7 +14,7 @@ $nome = null;
 $pass = null;
 
 //Se abbiamo ricevuto parametri GET, popoliamo le variabili
-if (isset($_GET["user"]) && isset($_GET["pass"])) {
+if (!empty($_GET["user"]) && !empty($_GET["pass"])) {
     $nome = $_GET["user"];
     $pass = $_GET["pass"];
 }
