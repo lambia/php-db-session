@@ -10,14 +10,9 @@ define("DB_PORT", 3306);
 $error = null;
 $loggedUser = null;
 $db = null;
-$nome = null;
-$pass = null;
-
 //Se abbiamo ricevuto parametri GET, popoliamo le variabili
-if (!empty($_GET["user"]) && !empty($_GET["pass"])) {
-    $nome = $_GET["user"];
-    $pass = $_GET["pass"];
-}
+$nome = !empty($_GET["user"]) ? $_GET["user"] : null;
+$pass = !empty($_GET["pass"]) ? $_GET["pass"] : null;
 
 //Tentiamo la connessione al database (in $db) gestendo errori (in $error)
 try {
@@ -63,7 +58,7 @@ if ($nome && $pass && $error == null) {
         <!-- Altrimenti -->
     <?php } else { /* header("Location: form.php"); } */ ?>
         <!-- Se abbiamo ricevuto credenziali, ma senza riscontro su DB  -->
-        <?php if ($nome && $pass) { ?>
+        <?php if (!empty($nome) || !empty($pass)) { ?>
             <div class="alert alert-danger" role="alert">Login failed!</div>
         <?php } ?>
         <!-- Se si è verificato un errore di connessione al DB -->
